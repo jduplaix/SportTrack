@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends MyApplication {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
