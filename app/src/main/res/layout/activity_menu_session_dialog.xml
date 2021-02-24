@@ -7,18 +7,19 @@
     >
 
     <Button
-        android:id="@+id/demarrer_suivi"
+        android:layout_marginTop="20dp"
+        android:id="@+id/track"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Démarrer un suivi"
+        android:text="@string/start_tracking"
         android:layout_gravity="center"
         />
 
     <Button
-        android:id="@+id/saisir_cr"
+        android:id="@+id/report"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Saisir un compte rendu"
+        android:text="@string/report_activity"
         android:layout_gravity="center"
         />
 

@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">SportTrack</string>
-    <string name="activite">Activité</string>
-    <string name="objectifs">Objectifs</string>
-    <string name="historique">Historique</string>
-    <string name="options">Options</string>
-    <string name="quitter">Quitter</string>
+    <string name="activity">Activités</string>
+    <string name="goals">Objectifs</string>
+    <string name="hist">Historique</string>
+    <string name="sports">Mes Sports</string>
+    <string name="exit">Quitter</string>
+    <string name="start_tracking">Démarrer une session</string>
+    <string name="report_activity">Saisir un compte rendu</string>
 </resources>
