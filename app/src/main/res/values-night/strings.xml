@@ -1,8 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SportTrack</string>
     <string name="activite">Activité</string>
     <string name="objectifs">Objectifs</string>
-    <string name="historique">Historique</string>
     <string name="options">Options</string>
     <string name="quitter">Quitter</string>
 </resources>
