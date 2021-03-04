@@ -1,4 +1,4 @@
-package com.example.sporttrack;
+package com.example.sporttrack.sports;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.sporttrack.R;
 import com.example.sporttrack.db.Sport;
 
 import java.util.ArrayList;
