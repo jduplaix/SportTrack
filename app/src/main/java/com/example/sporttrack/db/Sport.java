@@ -15,10 +15,10 @@ public class Sport {
     public String label;
 
     @ColumnInfo(name = "trackLength")
-    public boolean trackLength;
+    public int trackLength;
 
     @ColumnInfo(name = "trackTime")
-    public boolean trackTime;
+    public int trackTime;
 
     public String getLabel() {
         return label;
@@ -28,19 +28,19 @@ public class Sport {
         this.label = label;
     }
 
-    public boolean isTrackLength() {
+    public int isTrackLength() {
         return trackLength;
     }
 
-    public void setTrackLength(boolean trackLength) {
+    public void setTrackLength(int trackLength) {
         this.trackLength = trackLength;
     }
 
-    public boolean isTrackTime() {
+    public int isTrackTime() {
         return trackTime;
     }
 
-    public void setTrackTime(boolean trackTime) {
+    public void setTrackTime(int trackTime) {
         this.trackTime = trackTime;
     }
 }
