@@ -57,7 +57,7 @@ public class SportsActivity extends MyApplication {
         });
 
         //MOCK : écriture d'un sport en base
-        findViewById(R.id.fabCreateSport).setOnClickListener(v -> {
+        findViewById(R.id.fabAddSport).setOnClickListener(v -> {
             Toast.makeText(this, "Débranche vers l'activité création sport",Toast.LENGTH_SHORT).show();
         });
 

@@ -46,7 +46,6 @@ public class MenuActivity extends MyApplication {
         findViewById(R.id.sports).setOnClickListener(v -> {
             Intent intent = new Intent(MenuActivity.this, SportsActivity.class);
             startActivity(intent);
-            finish();
         });
     }
 }

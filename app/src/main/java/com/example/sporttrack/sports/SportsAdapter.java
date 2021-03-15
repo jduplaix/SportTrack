@@ -33,7 +33,7 @@ public class SportsAdapter extends ArrayAdapter<Sport> {
         int time = getItem(position).getTrackTime();
         int length = getItem(position).getTrackLength();
         String type;
-        if (time == 1 & length == 1){
+        if (time == 1 && length == 1){
             type = "durée | distance";
         } else if (time == 1){
             type = "durée";
