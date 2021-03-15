@@ -2,7 +2,11 @@ package com.example.sporttrack.sports;
 
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -21,22 +25,39 @@ public class SportsActivity extends MyApplication {
         setContentView(R.layout.activity_sports);
 
         AppDb db = getDb();
+        //instanciation lv de l'activity
+        ListView lvSports = (ListView) findViewById(R.id.lvSports);
 
-        //MOCK : test écriture d'un sport en base
-        findViewById(R.id.fab).setOnClickListener(v -> {
+
+        //Mock création de 20 sports en base
+        for (int i=1; i<21; i++){
             Sport sp = new Sport();
-            sp.label = "tennis";
+            sp.label = "sport"+i;
             sp.trackLength = 0;
             sp.trackTime = 1;
             db.sportDao().insert(sp);
+        }
+
+        //Instanciation d'un tableau de sports + alim avec les sports en base
+        ArrayList<Sport> sportsList = new ArrayList<>();
+        sportsList = (ArrayList<Sport>) db.sportDao().getAll();
+
+        //instanciation adapter perso avec collection sports + layout des items
+        SportsAdapter adapter = new SportsAdapter(this, R.layout.activity_sports_adapter, sportsList);
+        // Binding de l'adapter perso à la listview de l'activity sports
+        lvSports.setAdapter(adapter);
+        lvSports.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView tvSp = (TextView) view.findViewById(R.id.tvSportLabel);
+                String sp = tvSp.getText().toString();
+                Toast.makeText(SportsActivity.this, "Débranche vers le menu modifier du sport " + sp, Toast.LENGTH_SHORT).show();
+            }
         });
 
-        /* WIP : test lecture d'un sport en base */
-        findViewById(R.id.lire).setOnClickListener(v -> {
-            ArrayList<Sport> sports = (ArrayList<Sport>) db.sportDao().getAll();
-            SportsAdapter adapter = new SportsAdapter(this, sports);
-            ListView listView = (ListView) findViewById(R.id.sports);
-            listView.setAdapter(adapter);
+        //MOCK : écriture d'un sport en base
+        findViewById(R.id.fabCreateSport).setOnClickListener(v -> {
+            Toast.makeText(this, "Débranche vers l'activité création sport",Toast.LENGTH_SHORT).show();
         });
 
         //BUG : On back pressed : revient au menu du tel

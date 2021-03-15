@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(indices = {@Index(value = "label", unique = true)})
+@Entity//supp temporaire de la contrainte d'unicité(indices = {@Index(value = "label", unique = true)})
 public class Sport {
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -20,6 +20,10 @@ public class Sport {
     @ColumnInfo(name = "trackTime")
     public int trackTime;
 
+    public int getId() {
+        return id;
+    }
+
     public String getLabel() {
         return label;
     }
@@ -28,7 +32,7 @@ public class Sport {
         this.label = label;
     }
 
-    public int isTrackLength() {
+    public int getTrackLength() {
         return trackLength;
     }
 
@@ -36,7 +40,7 @@ public class Sport {
         this.trackLength = trackLength;
     }
 
-    public int isTrackTime() {
+    public int getTrackTime() {
         return trackTime;
     }
 

@@ -7,29 +7,41 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.example.sporttrack.R;
 import com.example.sporttrack.db.Sport;
 
 import java.util.ArrayList;
 
 public class SportsAdapter extends ArrayAdapter<Sport> {
-    public SportsAdapter(Context context, ArrayList<Sport> sports){
-        super(context, 0,sports);
+
+    private Context myContext;
+    int myResource;
+
+    public SportsAdapter(Context context, int resource, ArrayList<Sport> objects){
+        super(context, resource, objects);
+        myContext = context;
+        myResource = resource;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
-        Sport sport = getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_sports, parent, false);
-        }
-        // Lookup view for data population
-        TextView sportsItem = (TextView) convertView.findViewById(R.id.lire);
-        // Populate the data into the template view using the data object
-        sportsItem.setText(sport.getLabel());
-        // Return the completed view to render on screen
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        String label  = getItem(position).getLabel();
+        String time = String.valueOf(getItem(position).getTrackTime());
+        String length = String.valueOf(getItem(position).getTrackLength());
+
+        LayoutInflater inflater = LayoutInflater.from(myContext);
+        convertView = inflater.inflate(myResource, parent, false);
+
+        TextView tvSport = (TextView) convertView.findViewById(R.id.tvSportLabel);
+
+        tvSport.setText(label);
+
+
+
         return convertView;
     }
 }
