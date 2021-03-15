@@ -40,7 +40,7 @@ public class SportsActivityForm extends MyApplication {
             sp.setTrackTime(time);
             // INSERT dans la table
             String check = integrityCheck(sp);
-            if ( check == ""){
+            if (check == ""){
                 db.sportDao().insert(sp);
                 //rechargement de l'activité sportList pour maj la listview (easy mode) et fermeture de l'activité form
                 Intent intent = new Intent(SportsActivityForm.this, SportsActivity.class);

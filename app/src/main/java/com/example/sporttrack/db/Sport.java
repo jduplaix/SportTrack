@@ -1,6 +1,7 @@
 package com.example.sporttrack.db;
 
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
@@ -8,10 +9,9 @@ import androidx.room.PrimaryKey;
 
 @Entity//supp temporaire de la contrainte d'unicité(indices = {@Index(value = "label", unique = true)})
 public class Sport {
-    @PrimaryKey(autoGenerate = true)
-    public int id;
 
-    @ColumnInfo(name = "label")
+    @PrimaryKey()
+    @NonNull
     public String label;
 
     @ColumnInfo(name = "trackLength")
@@ -19,10 +19,6 @@ public class Sport {
 
     @ColumnInfo(name = "trackTime")
     public int trackTime;
-
-    public int getId() {
-        return id;
-    }
 
     public String getLabel() {
         return label;
