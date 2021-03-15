@@ -30,17 +30,24 @@ public class SportsAdapter extends ArrayAdapter<Sport> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String label  = getItem(position).getLabel();
-        String time = String.valueOf(getItem(position).getTrackTime());
-        String length = String.valueOf(getItem(position).getTrackLength());
+        int time = getItem(position).getTrackTime();
+        int length = getItem(position).getTrackLength();
+        String type;
+        if (time == 1 & length == 1){
+            type = "durée | distance";
+        } else if (time == 1){
+            type = "durée";
+        } else {
+            type = "distance";
+        }
 
         LayoutInflater inflater = LayoutInflater.from(myContext);
         convertView = inflater.inflate(myResource, parent, false);
 
-        TextView tvSport = (TextView) convertView.findViewById(R.id.tvSportLabel);
-
-        tvSport.setText(label);
-
-
+        TextView tvLabel = (TextView) convertView.findViewById(R.id.tvSportLabel);
+        TextView tvType = (TextView) convertView.findViewById(R.id.tvSportType);
+        tvLabel.setText(label);
+        tvType.setText(type);
 
         return convertView;
     }

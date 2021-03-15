@@ -12,6 +12,9 @@ public interface SportDao {
     @Query("SELECT * FROM Sport")
     List<Sport> getAll();
 
+    @Query("DELETE FROM Sport")
+    void deleteAll();
+
     @Insert
     long insert(Sport sport);
 

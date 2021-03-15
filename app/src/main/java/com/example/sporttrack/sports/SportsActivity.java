@@ -29,12 +29,13 @@ public class SportsActivity extends MyApplication {
         ListView lvSports = (ListView) findViewById(R.id.lvSports);
 
 
-        //Mock création de 20 sports en base
+        //Mock purge table Sports + création de 20 sports en base
+        db.sportDao().deleteAll();
         for (int i=1; i<21; i++){
             Sport sp = new Sport();
             sp.label = "sport"+i;
-            sp.trackLength = 0;
-            sp.trackTime = 1;
+            sp.trackLength = i % 3 == 0 || i %2 == 0 ? 1 : 0;
+            sp.trackTime = i % 3 == 0 || i %2 != 0 ? 1 : 0;
             db.sportDao().insert(sp);
         }
 
