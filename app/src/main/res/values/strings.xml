@@ -7,4 +7,5 @@
     <string name="exit">Quitter</string>
     <string name="start_tracking">Démarrer une session</string>
     <string name="report_activity">Saisir un compte rendu</string>
+    <string name="update_sport">Modifier</string>
 </resources>

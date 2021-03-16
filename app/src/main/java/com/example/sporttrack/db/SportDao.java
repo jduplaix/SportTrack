@@ -12,6 +12,9 @@ public interface SportDao {
     @Query("SELECT * FROM Sport")
     List<Sport> getAll();
 
+    @Query("SELECT * FROM Sport WHERE label = :sportLabel")
+    public Sport getSport(String sportLabel);
+
     @Query("DELETE FROM Sport")
     void deleteAll();
 
