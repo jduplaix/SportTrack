@@ -28,9 +28,25 @@ public class SportsActivityForm extends MyApplication {
 
         db = getDb();
 
-        //Enregistrement du sport renseigné sur le formulairede l'activité
+        //Enregistrement du sport renseigné sur le formulaire de l'activité
         findViewById(R.id.saveSport).setOnClickListener(v -> {
             sportSave();
+        });
+
+        //Suppression du sport identifié dans le formulaire
+        findViewById(R.id.deleteSport).setOnClickListener(v -> {
+            EditText etSpLabel = findViewById(R.id.sportLabel);
+            Sport sp = db.sportDao().getSport(etSpLabel.getText().toString());
+            if (sp == null){
+                Toast.makeText(this,
+                        "Le sport \""+ etSpLabel.getText().toString() + "\" n'existe pas."
+                        , Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this,
+                        "Le sport \""+ sp.getLabel() + "\" a bien été supprimé."
+                        , Toast.LENGTH_SHORT).show();
+                //deleteSport(sp);
+            }
         });
 
         // fermeture de l'activité en cliquant sur Annuler = idem onBackPressed
@@ -64,7 +80,16 @@ public class SportsActivityForm extends MyApplication {
             if (checkDup == null){
                 insertSport(sp);
             } else {
-                updateSport(sp);
+                View btnClicked = findViewById(R.id.saveSport);
+                Snackbar snackUpdate = Snackbar
+                        .make(btnClicked, "Le sport \""+ sp.getLabel() + "\" existe déjà.",Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Modifier", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                updateSport(sp);
+                            }
+                        });
+                snackUpdate.setAnchorView(btnClicked).show();
             }
         }
         else {
@@ -115,7 +140,7 @@ public class SportsActivityForm extends MyApplication {
     protected void insertSport(Sport sport){
         db.sportDao().insert(sport);
         Toast.makeText(this,
-                "Le sport "+ sport.getLabel() + " a bien été enregistré."
+                "Le sport \""+ sport.getLabel() + "\" a bien été enregistré."
                 , Toast.LENGTH_SHORT).show();
         //rechargement de l'activité sportList pour maj la listview (easy mode)
         Intent intent = new Intent(SportsActivityForm.this, SportsActivity.class);
@@ -125,8 +150,18 @@ public class SportsActivityForm extends MyApplication {
     }
 
     protected void updateSport(Sport sport){
-        View currentView = findViewById(R.id.saveSport);
-        Snackbar.make(currentView,"Le sport "+ sport.getLabel() + " existe déjà."
-                , Snackbar.LENGTH_SHORT).setAnchorView(R.id.saveSport).show();
+        try {
+            db.sportDao().updateSport(sport);
+            Toast.makeText(this,sport.getLabel() + " modifié !",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SportsActivityForm.this, SportsActivity.class);
+            startActivity(intent);
+            finish();
+        } catch (Exception e){
+            Toast.makeText(this,"Une erreur est survenue : " +e,Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    protected void deleteSport(Sport sport){
+
     }
 }
