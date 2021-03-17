@@ -1,24 +1,30 @@
 package com.example.sporttrack.db;
 
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(indices = {@Index(value = "label", unique = true)})
+@Entity//supp temporaire de la contrainte d'unicité(indices = {@Index(value = "label", unique = true)})
 public class Sport {
-    @PrimaryKey(autoGenerate = true)
-    public int id;
 
-    @ColumnInfo(name = "label")
+    public Sport(@NonNull String label, int trackLength, int trackTime) {
+        this.label = label;
+        this.trackLength = trackLength;
+        this.trackTime = trackTime;
+    }
+
+    @PrimaryKey()
+    @NonNull
     public String label;
 
     @ColumnInfo(name = "trackLength")
-    public boolean trackLength;
+    public int trackLength;
 
     @ColumnInfo(name = "trackTime")
-    public boolean trackTime;
+    public int trackTime;
 
     public String getLabel() {
         return label;
@@ -28,19 +34,19 @@ public class Sport {
         this.label = label;
     }
 
-    public boolean isTrackLength() {
+    public int getTrackLength() {
         return trackLength;
     }
 
-    public void setTrackLength(boolean trackLength) {
+    public void setTrackLength(int trackLength) {
         this.trackLength = trackLength;
     }
 
-    public boolean isTrackTime() {
+    public int getTrackTime() {
         return trackTime;
     }
 
-    public void setTrackTime(boolean trackTime) {
+    public void setTrackTime(int trackTime) {
         this.trackTime = trackTime;
     }
 }
