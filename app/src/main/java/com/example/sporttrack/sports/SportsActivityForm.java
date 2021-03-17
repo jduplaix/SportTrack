@@ -102,7 +102,7 @@ public class SportsActivityForm extends MyApplication {
             // si modif sport de la liste
             if (incSport != null) {
                 // si MaJ du label avec un label d'un autre sport existant : refus > l'UT doit en supprimer un lui même
-                if (checkDup != null && checkDup.getLabel() != incSport.getLabel()){
+                if (checkDup != null && !checkDup.getLabel().equals(incSport.getLabel())){
                     // Mise à jour impossible : le sport "" existe déjà
                     Snackbar snackUpgradeKo = Snackbar
                             .make(snackAnchor, "Mise à jour impossible:\nLe sport \"" + sport.getLabel() + "\" existe déjà.", Snackbar.LENGTH_SHORT);

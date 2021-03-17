@@ -22,7 +22,7 @@ public interface SportDao {
     @Query("UPDATE Sport " +
             "SET label = :newLabel, trackLength = :newLength, trackTime = :newTime " +
             "WHERE label = :oldLabel")
-    void upgradeSport(String oldLabel, String newLabel, int newTime, int newLength);
+    void upgradeSport(String oldLabel, String newLabel, int newLength, int newTime);
 
     @Update
     void updateSport(Sport sport);
