@@ -65,9 +65,9 @@ public class SportsActivityForm extends MyApplication {
             }
         });
 
-        // fermeture de l'activité en cliquant sur Annuler = idem onBackPressed
+        // retour à la liste en cliquant sur Annuler = idem onBackPressed
         findViewById(R.id.cancelSportForm).setOnClickListener(v -> {
-            finish();
+            onBackPressed();
         });
     }
 
@@ -96,18 +96,26 @@ public class SportsActivityForm extends MyApplication {
         sport  = new Sport(etSpLabel.getText().toString(),length,time);
         // Contrôle de saisie
         String check = integrityCheck();
+        Sport checkDup = duplicateCheck();
         if (check.isEmpty()) {
+            View snackAnchor = findViewById(R.id.saveSport); // décla anticipée de l'ancre du snack en cas de notif
             // si modif sport de la liste
             if (incSport != null) {
-                upgradeSport();
+                // si MaJ du label avec un label d'un autre sport existant : refus > l'UT doit en supprimer un lui même
+                if (checkDup != null && checkDup.getLabel() != incSport.getLabel()){
+                    // Mise à jour impossible : le sport "" existe déjà
+                    Snackbar snackUpgradeKo = Snackbar
+                            .make(snackAnchor, "Mise à jour impossible:\nLe sport \"" + sport.getLabel() + "\" existe déjà.", Snackbar.LENGTH_SHORT);
+                    snackUpgradeKo.setAnchorView(snackAnchor).show();
+                } else {
+                    upgradeSport();
+                }
             } else {
-                // sinon verif si sportLabel existe déjà avant insert
-                Sport checkDup = duplicateCheck();
+                // sinon si nouveau sport verif si sportLabel existe déjà avant insert
                 if (checkDup == null){
                     insertSport();
                 } else {
-                    // si le sport existe déjà alors qu'on veut le créer, snack proposition modif de l'existant en base
-                    View snackAnchor = findViewById(R.id.saveSport);
+                    // s'il existe déjà alors qu'on veut le créer, snack proposition update de l'existant en base
                     Snackbar snackUpdate = Snackbar
                             .make(snackAnchor, "Le sport \"" + sport.getLabel() + "\" existe déjà.", Snackbar.LENGTH_INDEFINITE)
                             .setAction("Modifier", new View.OnClickListener() {
