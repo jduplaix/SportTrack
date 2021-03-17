@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".sports.SportsActivityForm">
+
+    <EditText
+        android:id="@+id/sportLabel"
+        android:hint="Libellé du sport à créer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:textAlignment="center"
+        />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sportLength"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Distance mesurable?"
+        android:checked="false"
+        android:textOn="O"
+        android:textOff="N"
+        app:showText="true"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sportTime"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Durée quantifiable?"
+        android:checked="false"
+        android:textOn="O"
+        android:textOff="N"
+        app:showText="true"/>
+
+    <Button
+        android:layout_marginTop="150dp"
+        android:id="@+id/saveSport"
+        android:text="Enregistrer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_green_dark"
+        />
+
+    <Button
+        android:id="@+id/deleteSport"
+        android:text="Supprimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        />
+
+    <Button
+        android:id="@+id/cancelSportForm"
+        android:text="Annuler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        />
+
+</LinearLayout>

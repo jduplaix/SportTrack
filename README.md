@@ -13,3 +13,5 @@ Application Android de suivi d'objectifs sportifs
 ## Versions
 
 ## Analyse
+### Backlog
+![backlog](/analyse/backlog.png)
