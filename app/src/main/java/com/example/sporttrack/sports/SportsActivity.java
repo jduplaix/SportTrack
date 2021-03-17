@@ -30,17 +30,6 @@ public class SportsActivity extends MyApplication {
         //instanciation lv de l'activity
         ListView lvSports = (ListView) findViewById(R.id.lvSports);
 
-
-        //Mock purge table Sports + création de 20 sports en base
-        /*db.sportDao().deleteAll();
-        for (int i=1; i<21; i++){
-            Sport sp = new Sport();
-            sp.label = "sport"+i;
-            sp.trackLength = i % 3 == 0 || i %2 == 0 ? 1 : 0;
-            sp.trackTime = i % 3 == 0 || i %2 != 0 ? 1 : 0;
-            db.sportDao().insert(sp);
-        }*/
-
         //Instanciation d'un tableau de sports + alim avec les sports en base
         ArrayList<Sport> sportsList = new ArrayList<>();
         sportsList = (ArrayList<Sport>) db.sportDao().getAll();
@@ -61,7 +50,7 @@ public class SportsActivity extends MyApplication {
             }
         });
 
-        //MOCK : écriture d'un sport en base
+        // accès au form de gestion d'un sport (création ou modif si label déjà utilisé)
         findViewById(R.id.fabAddSport).setOnClickListener(v -> {
             Intent intent = new Intent(SportsActivity.this, SportsActivityForm.class);
             startActivity(intent);
