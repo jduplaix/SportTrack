@@ -20,6 +20,8 @@ import com.google.android.material.snackbar.Snackbar;
 public class SportsActivityForm extends MyApplication {
 
     AppDb db;
+    Sport sport; //sport géré dans le form
+    Sport incSport; // sport issu de la liste exposée sur ActivitySport
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,15 @@ public class SportsActivityForm extends MyApplication {
         setContentView(R.layout.activity_sports_form);
 
         db = getDb();
+
+        //si le form est accédé depuis un clic sur item de la liste, récup du libellé transmis
+        Intent incIntent = getIntent();
+        incSport = db.sportDao().getSport(incIntent.getStringExtra("spLabel"));
+        if (incSport == null){
+            Toast.makeText(this,"pas de sport passé", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this,incSport.getLabel(), Toast.LENGTH_SHORT).show();
+        }
 
         //Enregistrement du sport renseigné sur le formulaire de l'activité
         findViewById(R.id.saveSport).setOnClickListener(v -> {
@@ -62,14 +73,11 @@ public class SportsActivityForm extends MyApplication {
         // suivi distance (conversion bool vers int)
         SwitchCompat swSportLength = (SwitchCompat) findViewById(R.id.sportLength);
         int length = swSportLength.isChecked() ? 1 : 0;
-        //suivi durée (conversion bool vers int)
+        // suivi durée (conversion bool vers int)
         SwitchCompat swSportTime = (SwitchCompat) findViewById(R.id.sportTime);
         int time = swSportTime.isChecked() ? 1 : 0;
         //hydratation d'un nouveau sport avec la saisie du form
-        Sport sp  = new Sport();
-        sp.setLabel(etSpLabel.getText().toString());
-        sp.setTrackLength(length);
-        sp.setTrackTime(time);
+        Sport sp  = new Sport(etSpLabel.getText().toString(),length,time);
         // Contrôle de saisie
         String check = integrityCheck(sp);
         if (check.isEmpty()) {

@@ -48,7 +48,7 @@ public class SportsAdapter extends ArrayAdapter<Sport> {
         LayoutInflater inflater = LayoutInflater.from(myContext);
         convertView = inflater.inflate(myResource, parent, false);
 
-        //binding du libellé + type de suivi
+        //binding des attr de l'objet avec le front
         TextView tvLabel = (TextView) convertView.findViewById(R.id.tvSportLabel);
         TextView tvType = (TextView) convertView.findViewById(R.id.tvSportType);
         tvLabel.setText(label);

@@ -53,8 +53,10 @@ public class SportsActivity extends MyApplication {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView tvSp = (TextView) view.findViewById(R.id.tvSportLabel);
-                String sp = tvSp.getText().toString();
-                Toast.makeText(SportsActivity.this, "Débranche vers le menu modifier du sport " + sp, Toast.LENGTH_SHORT).show();
+                String spLabel = tvSp.getText().toString();
+                Intent intent = new Intent(SportsActivity.this, SportsActivityForm.class);
+                intent.putExtra("spLabel",spLabel);
+                startActivity(intent);
             }
         });
 

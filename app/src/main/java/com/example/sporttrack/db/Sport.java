@@ -10,6 +10,12 @@ import androidx.room.PrimaryKey;
 @Entity//supp temporaire de la contrainte d'unicité(indices = {@Index(value = "label", unique = true)})
 public class Sport {
 
+    public Sport(@NonNull String label, int trackLength, int trackTime) {
+        this.label = label;
+        this.trackLength = trackLength;
+        this.trackTime = trackTime;
+    }
+
     @PrimaryKey()
     @NonNull
     public String label;
