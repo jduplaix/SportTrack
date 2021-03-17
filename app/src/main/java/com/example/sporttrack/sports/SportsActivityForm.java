@@ -42,10 +42,7 @@ public class SportsActivityForm extends MyApplication {
                         "Le sport \""+ etSpLabel.getText().toString() + "\" n'existe pas."
                         , Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this,
-                        "Le sport \""+ sp.getLabel() + "\" a bien été supprimé."
-                        , Toast.LENGTH_SHORT).show();
-                //deleteSport(sp);
+                deleteSport(sp);
             }
         });
 
@@ -152,7 +149,7 @@ public class SportsActivityForm extends MyApplication {
     protected void updateSport(Sport sport){
         try {
             db.sportDao().updateSport(sport);
-            Toast.makeText(this,sport.getLabel() + " modifié !",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Le sport \"" + sport.getLabel() + "\" a bien été modifié.",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SportsActivityForm.this, SportsActivity.class);
             startActivity(intent);
             finish();
@@ -162,6 +159,20 @@ public class SportsActivityForm extends MyApplication {
     }
 
     protected void deleteSport(Sport sport){
-
+        //snack confirmation avant suppression
+        View snackAnchor = findViewById(R.id.saveSport);
+        Snackbar snackDelete = Snackbar
+                .make(snackAnchor, "Le sport \""+ sport.getLabel() + "\" va être supprimé.",Snackbar.LENGTH_INDEFINITE)
+                .setAction("Confirmer", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        db.sportDao().delete(sport);
+                        Toast.makeText(SportsActivityForm.this,"Le sport \"" + sport.getLabel() + "\" a bien été supprimé.",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SportsActivityForm.this, SportsActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+        snackDelete.setAnchorView(snackAnchor).show();
     }
 }
