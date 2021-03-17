@@ -18,30 +18,39 @@
         android:textAlignment="center"
         />
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/sportLength"
-        android:layout_marginTop="50dp"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Distance mesurable?"
+        android:text="Indicateurs de suivi :"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sportLength"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Distance"
         android:checked="false"
         android:textOn="O"
         android:textOff="N"
-        app:showText="true"/>
+        app:showText="true"
+        android:layout_marginTop="20dp"
+        />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/sportTime"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Durée quantifiable?"
+        android:text="Durée"
         android:checked="false"
         android:textOn="O"
         android:textOff="N"
         app:showText="true"/>
 
     <Button
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:id="@+id/saveSport"
         android:text="Enregistrer"
         android:layout_width="match_parent"
