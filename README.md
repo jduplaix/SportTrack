@@ -7,6 +7,7 @@ Application Android de suivi d'objectifs sportifs
 - Java = CamelCase
     - lower pour les variables et les noms de méthodes
     - upper pour les classes
+    - préfixer les instance de composants de layout par le type de composant (Ex. : EditText avec id _sportLabel_ = **et**SportLabel)
 - lower CamelCase pour les id de composants de layout
 - snake_case pour les fichiers .xml
 - pas de rêgle arrêtée pour la documentation : rester cohérent vis à vis de l'existant
