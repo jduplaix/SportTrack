@@ -80,16 +80,16 @@ public class SportsActivityForm extends MyApplication {
             if (checkDup == null){
                 insertSport(sp);
             } else {
-                View btnClicked = findViewById(R.id.saveSport);
+                View snackAnchor = findViewById(R.id.saveSport);
                 Snackbar snackUpdate = Snackbar
-                        .make(btnClicked, "Le sport \""+ sp.getLabel() + "\" existe déjà.",Snackbar.LENGTH_INDEFINITE)
+                        .make(snackAnchor, "Le sport \""+ sp.getLabel() + "\" existe déjà.",Snackbar.LENGTH_INDEFINITE)
                         .setAction("Modifier", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 updateSport(sp);
                             }
                         });
-                snackUpdate.setAnchorView(btnClicked).show();
+                snackUpdate.setAnchorView(snackAnchor).show();
             }
         }
         else {
