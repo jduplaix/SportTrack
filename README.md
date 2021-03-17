@@ -29,4 +29,4 @@ TODO: tests unitaires non implémentés.
 
 ## Analyse
 ### Backlog
-![backlog](/analyse/backlog.png)
+![backlog](/docs/backlog.png)
