@@ -19,6 +19,11 @@ public interface SportDao {
     @Query("DELETE FROM Sport")
     void deleteAll();
 
+    @Query("UPDATE Sport " +
+            "SET label = :newLabel, trackLength = :newLength, trackTime = :newTime " +
+            "WHERE label = :oldLabel")
+    void upgradeSport(String oldLabel, String newLabel, int newTime, int newLength);
+
     @Update
     void updateSport(Sport sport);
 

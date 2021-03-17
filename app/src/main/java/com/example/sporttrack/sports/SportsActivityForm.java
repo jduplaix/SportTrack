@@ -6,10 +6,10 @@ import androidx.appcompat.widget.SwitchCompat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.sporttrack.MenuActivity;
 import com.example.sporttrack.MyApplication;
 import com.example.sporttrack.R;
 import com.example.sporttrack.db.AppDb;
@@ -30,13 +30,20 @@ public class SportsActivityForm extends MyApplication {
 
         db = getDb();
 
-        //si le form est accédé depuis un clic sur item de la liste, récup du libellé transmis
+        // si le form est accédé depuis un clic sur item de la liste, récup du libellé > instanciation du sp de l'item
         Intent incIntent = getIntent();
         incSport = db.sportDao().getSport(incIntent.getStringExtra("spLabel"));
-        if (incSport == null){
-            Toast.makeText(this,"pas de sport passé", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this,incSport.getLabel(), Toast.LENGTH_SHORT).show();
+        if (incSport != null) {
+            // changement de libellé du bouton enregistrer > modifier
+            Button saveBtn = findViewById(R.id.saveSport);
+            saveBtn.setText("Modifier");
+            // valorisation du form avec les attr du sp transmis
+            EditText etSpLabel = findViewById(R.id.sportLabel);
+            etSpLabel.setText(incSport.getLabel());
+            SwitchCompat swSportLength = (SwitchCompat) findViewById(R.id.sportLength);
+            swSportLength.setChecked(incSport.getTrackLength() == 0 ? false : true);
+            SwitchCompat swSportTime = (SwitchCompat) findViewById(R.id.sportTime);
+            swSportTime.setChecked(incSport.getTrackTime() == 0 ? false : true);
         }
 
         //Enregistrement du sport renseigné sur le formulaire de l'activité
@@ -81,23 +88,32 @@ public class SportsActivityForm extends MyApplication {
         // Contrôle de saisie
         String check = integrityCheck(sp);
         if (check.isEmpty()) {
-            Sport checkDup = duplicateCheck(sp);
-            if (checkDup == null){
-                insertSport(sp);
+            // si modif sport de la liste
+            if (incSport != null) {
+                sport = sp;
+                upgradeSport();
             } else {
-                View snackAnchor = findViewById(R.id.saveSport);
-                Snackbar snackUpdate = Snackbar
-                        .make(snackAnchor, "Le sport \""+ sp.getLabel() + "\" existe déjà.",Snackbar.LENGTH_INDEFINITE)
-                        .setAction("Modifier", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                updateSport(sp);
-                            }
-                        });
-                snackUpdate.setAnchorView(snackAnchor).show();
+                // sinon verif si sportLabel existe déjà avant insert
+                Sport checkDup = duplicateCheck(sp);
+                if (checkDup == null){
+                    insertSport(sp);
+                } else {
+                    // si le sport existe déjà alors qu'on veut le créer, snack proposition modif de l'existant en base
+                    View snackAnchor = findViewById(R.id.saveSport);
+                    Snackbar snackUpdate = Snackbar
+                            .make(snackAnchor, "Le sport \"" + sp.getLabel() + "\" existe déjà.", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Modifier", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    updateSport(sp);
+                                }
+                            });
+                    snackUpdate.setAnchorView(snackAnchor).show();
+                }
             }
         }
         else {
+            // Toast si ctrl de saisie KO
             Toast.makeText(this, check, Toast.LENGTH_LONG).show();
         }
     }
@@ -182,5 +198,13 @@ public class SportsActivityForm extends MyApplication {
                     }
                 });
         snackDelete.setAnchorView(snackAnchor).show();
+    }
+
+    protected void upgradeSport(){
+        db.sportDao().upgradeSport(incSport.getLabel(), sport.getLabel(),sport.getTrackLength(),sport.getTrackTime());
+        Toast.makeText(this,"Le sport \"" + incSport.getLabel() + "\" a bien été mis à jour.",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(SportsActivityForm.this, SportsActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

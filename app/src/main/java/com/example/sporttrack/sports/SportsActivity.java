@@ -57,6 +57,7 @@ public class SportsActivity extends MyApplication {
                 Intent intent = new Intent(SportsActivity.this, SportsActivityForm.class);
                 intent.putExtra("spLabel",spLabel);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -64,6 +65,7 @@ public class SportsActivity extends MyApplication {
         findViewById(R.id.fabAddSport).setOnClickListener(v -> {
             Intent intent = new Intent(SportsActivity.this, SportsActivityForm.class);
             startActivity(intent);
+            finish();
         });
     }
 }
