@@ -61,13 +61,13 @@ public class SportsActivity extends MyApplication {
                 String spLabel = tvSp.getText().toString();
                 if (mode == 0){
                     Intent intent = new Intent(SportsActivity.this, SportsActivityForm.class);
-                    intent.putExtra("spLabel",spLabel);
-                    intent.putExtra("mode",mode);
+                    intent.putExtra("spLabel", spLabel);
+                    intent.putExtra("mode", mode);
                     startActivity(intent);
                     finish();
                 } else {
                     Intent intent = new Intent(SportsActivity.this, TrackRealTimeActivity.class);
-                    intent.putExtra("spLabel",spLabel);
+                    intent.putExtra("spLabel", spLabel);
                     startActivity(intent);
                     finish();
                 }

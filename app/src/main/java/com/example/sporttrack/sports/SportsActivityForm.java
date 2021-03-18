@@ -21,7 +21,7 @@ public class SportsActivityForm extends MyApplication {
 
     AppDb db;
     Sport sport; //sport géré dans le form
-    Sport incSport; // sport issu de la liste exposée sur ActivitySport
+    Sport incSport; // label du sport arrivant de la liste exposée sur ActivitySport
     int mode; // voir SportsActivity.class
 
     @Override

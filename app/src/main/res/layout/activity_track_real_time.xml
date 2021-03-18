@@ -9,8 +9,8 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Suivre une activité"
+        android:layout_height="80dp"
+        android:text="Suivre une activité en temps réel :"
         android:textSize="30dp"
         android:id="@+id/tvTrackRTTitle"
         android:paddingLeft="10dp"
@@ -18,17 +18,18 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:text="Sport"
-        android:textSize="25dp"
+        android:textSize="40dp"
         android:textAlignment="center"
         android:id="@+id/tvTrackRTSport"
+        android:textStyle="bold|italic"
         />
 
     <TextView
         android:paddingLeft="10dp"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:text="Début"
         android:textSize="25dp"
         android:id="@+id/tvTrackRTStart"
@@ -36,51 +37,66 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text=""
+        android:layout_height="30dp"
         android:textSize="20dp"
         android:textAlignment="center"
         android:id="@+id/tvTrackRTStartDate"/>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text=""
+        android:layout_height="30dp"
         android:textSize="20dp"
         android:textAlignment="center"
         android:id="@+id/tvTrackRTStartTime"/>
 
-    <TextView
-        android:paddingLeft="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Fin"
-        android:textSize="30dp"
-        android:id="@+id/tvTrackRTEnd"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text=""
-        android:textSize="20dp"
-        android:textAlignment="center"
-        android:id="@+id/tvTrackRTEndDate"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text=""
-        android:textSize="20dp"
-        android:textAlignment="center"
-        android:id="@+id/tvTrackRTEndTime"/>
-
     <Chronometer
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="40dp"
         android:textAlignment="center"
         android:id="@+id/chTrackRTChrono"
         />
+
+    <TextView
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Fin"
+        android:textSize="25dp"
+        android:id="@+id/tvTrackRTEnd"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:id="@+id/tvTrackRTEndDate"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:id="@+id/tvTrackRTEndTime"/>
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Temps total"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:id="@+id/tvTrackRTTotal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="30dp"
+        android:textStyle="italic"
+        android:textAlignment="center"
+        android:id="@+id/tvTrackRTTotalElapsed"/>
 
     <Button
         android:layout_marginTop="50dp"
