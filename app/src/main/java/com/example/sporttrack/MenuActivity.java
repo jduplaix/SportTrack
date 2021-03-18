@@ -17,22 +17,21 @@ public class MenuActivity extends MyApplication {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        // Clic bouton couleur : appel seekbars + récup et changement bg color
         findViewById(R.id.activity).setOnClickListener(v -> {
-            View contentView = LayoutInflater.from(this).inflate(R.layout.activity_menu_session_dialog, null);
+            View dialogView = LayoutInflater.from(this).inflate(R.layout.activity_menu_session_dialog, null);
 
-            contentView.findViewById(R.id.track).setOnClickListener(e -> {
+            dialogView.findViewById(R.id.track).setOnClickListener(e -> {
                 Toast.makeText(MenuActivity.this,"vers activité démarrage suivi",Toast.LENGTH_SHORT).show();
             });
 
-            contentView.findViewById(R.id.report).setOnClickListener(e -> {
+            dialogView.findViewById(R.id.report).setOnClickListener(e -> {
                 Toast.makeText(MenuActivity.this,"vers la saisie d'une activité passée",Toast.LENGTH_SHORT).show();
             });
 
 
             new AlertDialog.Builder(MenuActivity.this)
                     .setTitle("Suivre une activité :")
-                    .setView(contentView)
+                    .setView(dialogView)
                     .setNegativeButton("Annuler", null)
                     .show();
         });
