@@ -22,6 +22,7 @@ public class SportsActivityForm extends MyApplication {
     AppDb db;
     Sport sport; //sport géré dans le form
     Sport incSport; // sport issu de la liste exposée sur ActivitySport
+    int mode; // voir SportsActivity.class
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +31,16 @@ public class SportsActivityForm extends MyApplication {
 
         db = getDb();
 
+        // recup parcours utilisateur
+        Intent incIntent = getIntent();
+        mode = incIntent.getIntExtra("mode",0);
+        Toast.makeText(this,String.valueOf(mode),Toast.LENGTH_SHORT).show();
+
         // si le form est accédé depuis un clic sur item de la liste,
         // récup du libellé du sport > instanciation du sport correspondant à l'item
-        Intent incIntent = getIntent();
+        //Intent incIntent = getIntent();
         incSport = db.sportDao().getSport(incIntent.getStringExtra("spLabel"));
+
         if (incSport != null) {
             // changement de libellé du bouton enregistrer > modifier
             Button saveBtn = findViewById(R.id.saveSport);
@@ -75,6 +82,7 @@ public class SportsActivityForm extends MyApplication {
     public void onBackPressed() {
         // l'activity list est fermée; réouverture si back pressed
         Intent intent = new Intent(SportsActivityForm.this, SportsActivity.class);
+        intent.putExtra("mode", mode);
         startActivity(intent);
         finish();
     }
@@ -181,6 +189,7 @@ public class SportsActivityForm extends MyApplication {
                 , Toast.LENGTH_SHORT).show();
         //rechargement de l'activité sportList pour maj la listview (easy mode)
         Intent intent = new Intent(SportsActivityForm.this, SportsActivity.class);
+        intent.putExtra("mode", mode);
         startActivity(intent);
         //fermeture de l'activité form
         finish();
@@ -191,6 +200,7 @@ public class SportsActivityForm extends MyApplication {
             db.sportDao().updateSport(sport);
             Toast.makeText(this,"Le sport \"" + sport.getLabel() + "\" a bien été modifié.",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SportsActivityForm.this, SportsActivity.class);
+            intent.putExtra("mode", mode);
             startActivity(intent);
             finish();
         } catch (Exception e){
@@ -209,6 +219,7 @@ public class SportsActivityForm extends MyApplication {
                         db.sportDao().delete(sport);
                         Toast.makeText(SportsActivityForm.this,"Le sport \"" + sport.getLabel() + "\" a bien été supprimé.",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SportsActivityForm.this, SportsActivity.class);
+                        intent.putExtra("mode", mode);
                         startActivity(intent);
                         finish();
                     }
@@ -220,6 +231,7 @@ public class SportsActivityForm extends MyApplication {
         db.sportDao().upgradeSport(incSport.getLabel(), sport.getLabel(),sport.getTrackLength(),sport.getTrackTime());
         Toast.makeText(this,"Le sport \"" + incSport.getLabel() + "\" a bien été mis à jour.",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(SportsActivityForm.this, SportsActivity.class);
+        intent.putExtra("mode", mode);
         startActivity(intent);
         finish();
     }

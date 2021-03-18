@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.sporttrack.sports.SportsActivity;
 
@@ -18,16 +17,15 @@ public class MenuActivity extends MyApplication {
         setContentView(R.layout.activity_menu);
 
         findViewById(R.id.activity).setOnClickListener(v -> {
-            View dialogView = LayoutInflater.from(this).inflate(R.layout.activity_menu_session_dialog, null);
+            View dialogView = LayoutInflater.from(this).inflate(R.layout.activity_menu_track_dialog, null);
 
             dialogView.findViewById(R.id.track).setOnClickListener(e -> {
-                Toast.makeText(MenuActivity.this,"vers activité démarrage suivi",Toast.LENGTH_SHORT).show();
+                startTrackingActivity(1);
             });
 
             dialogView.findViewById(R.id.report).setOnClickListener(e -> {
-                Toast.makeText(MenuActivity.this,"vers la saisie d'une activité passée",Toast.LENGTH_SHORT).show();
+                startTrackingActivity(2);
             });
-
 
             new AlertDialog.Builder(MenuActivity.this)
                     .setTitle("Suivre une activité :")
@@ -46,5 +44,11 @@ public class MenuActivity extends MyApplication {
             Intent intent = new Intent(MenuActivity.this, SportsActivity.class);
             startActivity(intent);
         });
+    }
+
+    protected void startTrackingActivity(int mode){
+        Intent intent = new Intent(MenuActivity.this, SportsActivity.class);
+        intent.putExtra("mode",mode);
+        startActivity(intent);
     }
 }
