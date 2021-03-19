@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
+import com.example.sporttrack.history.HistoryActivity;
 import com.example.sporttrack.sports.SportsActivity;
 
 public class MenuActivity extends MyApplication {
@@ -17,29 +17,28 @@ public class MenuActivity extends MyApplication {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        // Clic bouton couleur : appel seekbars + récup et changement bg color
         findViewById(R.id.activity).setOnClickListener(v -> {
-            View contentView = LayoutInflater.from(this).inflate(R.layout.activity_menu_session_dialog, null);
+            View dialogView = LayoutInflater.from(this).inflate(R.layout.activity_menu_track_dialog, null);
 
-            contentView.findViewById(R.id.track).setOnClickListener(e -> {
-                Toast.makeText(MenuActivity.this,"vers activité démarrage suivi",Toast.LENGTH_SHORT).show();
+            dialogView.findViewById(R.id.track).setOnClickListener(e -> {
+                startTrackingActivity(1);
             });
 
-            contentView.findViewById(R.id.report).setOnClickListener(e -> {
-                Toast.makeText(MenuActivity.this,"vers la saisie d'une activité passée",Toast.LENGTH_SHORT).show();
+            dialogView.findViewById(R.id.report).setOnClickListener(e -> {
+                startTrackingActivity(2);
             });
-
 
             new AlertDialog.Builder(MenuActivity.this)
                     .setTitle("Suivre une activité :")
-                    .setView(contentView)
+                    .setView(dialogView)
                     .setNegativeButton("Annuler", null)
                     .show();
         });
 
-        //Fermeture complète de l'app sur clic bouton QUITTER
-        findViewById(R.id.exit).setOnClickListener(v -> {
-            finishAndRemoveTask();
+        //Appel de l'activité historique des activités sportives
+        findViewById(R.id.history).setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, HistoryActivity.class);
+            startActivity(intent);
         });
 
         //Appel de l'activité de gestion des sports
@@ -47,5 +46,16 @@ public class MenuActivity extends MyApplication {
             Intent intent = new Intent(MenuActivity.this, SportsActivity.class);
             startActivity(intent);
         });
+
+        //Fermeture complète de l'app sur clic bouton QUITTER
+        findViewById(R.id.exit).setOnClickListener(v -> {
+            finishAndRemoveTask();
+        });
+    }
+
+    protected void startTrackingActivity(int mode){
+        Intent intent = new Intent(MenuActivity.this, SportsActivity.class);
+        intent.putExtra("mode",mode);
+        startActivity(intent);
     }
 }

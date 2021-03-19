@@ -29,7 +29,7 @@
         android:layout_width="200dp"/>
 
     <Button
-        android:id="@+id/hist"
+        android:id="@+id/history"
         android:text="@string/hist"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
