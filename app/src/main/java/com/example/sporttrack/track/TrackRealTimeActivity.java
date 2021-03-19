@@ -4,6 +4,7 @@ package com.example.sporttrack.track;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ public class TrackRealTimeActivity extends MyApplication {
     AppDb db;
     Date startDateTime;
     Date stopDateTime;
-    Date timeTracked;
+    int timeTracked[];
 
 
     @Override
@@ -59,6 +60,7 @@ public class TrackRealTimeActivity extends MyApplication {
         btnStartStop.setOnClickListener(v -> {
             switch((String) btnStartStop.getText()){
                 case "Démarrer":
+                    chrono.setBase(SystemClock.elapsedRealtime());
                     chrono.start();
                     startDateTime = Calendar.getInstance().getTime();
                     tvStartDate.setText(myDateFormat.format(startDateTime));
@@ -74,7 +76,7 @@ public class TrackRealTimeActivity extends MyApplication {
 
                     long difference = Math.abs(stopDateTime.getTime() - startDateTime.getTime());
                     //difference = (difference / 1000)+1;
-                    tvTotalElapsed.setText(String.valueOf(difference));
+                    tvTotalElapsed.setText(elapsedTime(difference));
                     break;
                 case "Enregistrer":
                     Toast.makeText(this,"Suivi enregistré.",Toast.LENGTH_SHORT).show();
@@ -86,5 +88,20 @@ public class TrackRealTimeActivity extends MyApplication {
             onBackPressed();
             finish();
         });
+    }
+
+    protected String elapsedTime(long dateTimeDiff){
+        long remainingTime;
+        int activityDays = (int) dateTimeDiff /(24 * 60 * 60 * 1000);
+        remainingTime = dateTimeDiff % (24 * 60 * 60 * 1000);
+        int activityHours = (int) remainingTime / (60 * 60 * 1000);
+        remainingTime = remainingTime % (60 * 60 * 1000);
+        int activityMinutes = (int) remainingTime / (60 * 1000);
+        remainingTime = remainingTime % ( 60 * 1000);
+        int activitySeconds = (int) remainingTime / 1000;
+        return String.valueOf(activityDays) + "j - "
+                + String.valueOf(activityHours) + "h - "
+                + String.valueOf(activityMinutes) + "m - "
+                + String.valueOf(activitySeconds) + "s";
     }
 }
