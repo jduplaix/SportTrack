@@ -28,7 +28,6 @@ public class TrackedSport {
     @ColumnInfo(name = "trackingStart")
     public Date trackingStart;
 
-    @Ignore
     @ColumnInfo(name = "trackingEnd")
     public Date trackingEnd;
 
@@ -62,7 +61,6 @@ public class TrackedSport {
         return trackingStart;
     }
 
-    @NonNull
     public Date getTrackingEnd() {
         return trackingEnd;
     }
@@ -97,7 +95,7 @@ public class TrackedSport {
         this.trackingStart = trackingStart;
     }
 
-    public void setTrackingEnd(@NonNull Date trackingEnd) {
+    public void setTrackingEnd(Date trackingEnd) {
         this.trackingEnd = trackingEnd;
     }
 

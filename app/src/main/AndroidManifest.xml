@@ -9,8 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SportTrack">
-        <activity android:name=".history.HistoryActivity"></activity>
-        <activity android:name=".sports.SportsActivityForm" />
         <activity android:name=".MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,8 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".sports.SportsActivity" />
+        <activity android:name=".sports.SportsActivityForm" />
         <activity android:name=".tracking.TrackRealTimeActivity" />
         <activity android:name=".tracking.TrackReportActivity" />
+        <activity android:name=".history.HistoryActivity" />
     </application>
 
 </manifest>

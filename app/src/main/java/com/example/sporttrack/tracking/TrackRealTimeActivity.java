@@ -18,6 +18,7 @@ import com.example.sporttrack.db.TrackedSport;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -26,8 +27,7 @@ public class TrackRealTimeActivity extends MyApplication {
     Sport sport;
     TrackedSport trackedSport;
     AppDb db;
-    Date startDateTime;
-    Date stopDateTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,7 @@ public class TrackRealTimeActivity extends MyApplication {
                     db.trackedSportDao().insert(trackedSport);
                     Toast.makeText(this,"Suivi du " + sport.getLabel() + " enregistré.",Toast.LENGTH_SHORT).show();
                     finish();
+                    break;
             }
         });
 

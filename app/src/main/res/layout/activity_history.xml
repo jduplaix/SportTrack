@@ -11,6 +11,14 @@
         android:layout_height="wrap_content"
         android:text="Historique"
         android:id="@+id/tvHistTitle"
+        android:textSize="40dp"
+        />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvHist"
+        android:layout_marginTop="100dp"
         />
 
 </RelativeLayout>
