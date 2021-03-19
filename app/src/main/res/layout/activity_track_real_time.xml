@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tracking.TrackRealTimeActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="Suivre une activité en temps réel :"
+        android:textSize="30dp"
+        android:id="@+id/tvTrackRTTitle"
+        android:paddingLeft="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Sport"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:id="@+id/tvTrackRTSport"
+        android:textStyle="bold|italic"
+        />
+
+    <TextView
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Début"
+        android:textSize="25dp"
+        android:id="@+id/tvTrackRTStart"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:id="@+id/tvTrackRTStartDate"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:id="@+id/tvTrackRTStartTime"/>
+
+    <Chronometer
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:id="@+id/chTrackRTChrono"
+        />
+
+    <TextView
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Fin"
+        android:textSize="25dp"
+        android:id="@+id/tvTrackRTEnd"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:id="@+id/tvTrackRTEndDate"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:id="@+id/tvTrackRTEndTime"/>
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Temps total"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:id="@+id/tvTrackRTTotal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="30dp"
+        android:textStyle="italic"
+        android:textAlignment="center"
+        android:id="@+id/tvTrackRTTotalElapsed"/>
+
+    <Button
+        android:layout_marginTop="50dp"
+        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Démarrer"
+        android:id="@+id/btnTrackRTStart"
+        />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Annuler"
+        android:id="@+id/btnTrackRTCancel"
+        />
+
+</LinearLayout>
