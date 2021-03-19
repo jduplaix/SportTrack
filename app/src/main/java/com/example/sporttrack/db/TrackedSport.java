@@ -3,6 +3,7 @@ package com.example.sporttrack.db;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
@@ -11,10 +12,9 @@ import java.util.Date;
 public class TrackedSport {
 
     // Constructeur
-    public TrackedSport(@NonNull Sport trackedSport, @NonNull Date trackingStart, @NonNull Date trackingEnd) {
+    public TrackedSport(@NonNull String trackedSport, @NonNull Date trackingStart) {
         this.trackedSport = trackedSport;
         this.trackingStart = trackingStart;
-        this.trackingEnd = trackingEnd;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -22,13 +22,13 @@ public class TrackedSport {
 
     @NonNull
     @ColumnInfo(name = "trackedSport")
-    public Sport trackedSport;
+    public String trackedSport;
 
     @NonNull
     @ColumnInfo(name = "trackingStart")
     public Date trackingStart;
 
-    @NonNull
+    @Ignore
     @ColumnInfo(name = "trackingEnd")
     public Date trackingEnd;
 
@@ -53,7 +53,7 @@ public class TrackedSport {
     }
 
     @NonNull
-    public Sport getTrackedSport() {
+    public String getTrackedSport() {
         return trackedSport;
     }
 
@@ -89,7 +89,7 @@ public class TrackedSport {
 
     // Setters
 
-    public void setTrackedSport(@NonNull Sport trackedSport) {
+    public void setTrackedSport(@NonNull String trackedSport) {
         this.trackedSport = trackedSport;
     }
 

@@ -14,6 +14,7 @@ import com.example.sporttrack.MyApplication;
 import com.example.sporttrack.R;
 import com.example.sporttrack.db.AppDb;
 import com.example.sporttrack.db.Sport;
+import com.example.sporttrack.db.TrackedSport;
 
 
 import java.text.SimpleDateFormat;
@@ -23,11 +24,10 @@ import java.util.Date;
 public class TrackRealTimeActivity extends MyApplication {
 
     Sport sport;
+    TrackedSport trackedSport;
     AppDb db;
     Date startDateTime;
     Date stopDateTime;
-    int timeTracked[];
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,26 +60,27 @@ public class TrackRealTimeActivity extends MyApplication {
         btnStartStop.setOnClickListener(v -> {
             switch((String) btnStartStop.getText()){
                 case "Démarrer":
+                    trackedSport = new TrackedSport(sport.getLabel(), Calendar.getInstance().getTime());
                     chrono.setBase(SystemClock.elapsedRealtime());
                     chrono.start();
-                    startDateTime = Calendar.getInstance().getTime();
-                    tvStartDate.setText(myDateFormat.format(startDateTime));
-                    tvStartTime.setText(myTimeFormat.format(startDateTime));
+                    //startDateTime = Calendar.getInstance().getTime();
+                    tvStartDate.setText(myDateFormat.format(trackedSport.getTrackingStart()));
+                    tvStartTime.setText(myTimeFormat.format(trackedSport.getTrackingStart()));
                     btnStartStop.setText("Arrêter");
                     break;
                 case "Arrêter":
                     chrono.stop();
-                    stopDateTime = Calendar.getInstance().getTime();
-                    tvEndDate.setText(myDateFormat.format(stopDateTime));
-                    tvEndTime.setText(myTimeFormat.format(stopDateTime));
+                    trackedSport.setTrackingEnd(Calendar.getInstance().getTime());
+                    tvEndDate.setText(myDateFormat.format(trackedSport.getTrackingEnd()));
+                    tvEndTime.setText(myTimeFormat.format(trackedSport.getTrackingEnd()));
                     btnStartStop.setText("Enregistrer");
 
-                    long difference = Math.abs(stopDateTime.getTime() - startDateTime.getTime());
-                    //difference = (difference / 1000)+1;
+                    long difference = Math.abs(trackedSport.getTrackingEnd().getTime() - trackedSport.getTrackingStart().getTime());
                     tvTotalElapsed.setText(elapsedTime(difference));
                     break;
                 case "Enregistrer":
-                    Toast.makeText(this,"Suivi enregistré.",Toast.LENGTH_SHORT).show();
+                    db.trackedSportDao().insert(trackedSport);
+                    Toast.makeText(this,"Suivi du " + sport.getLabel() + " enregistré.",Toast.LENGTH_SHORT).show();
                     finish();
             }
         });
@@ -92,16 +93,16 @@ public class TrackRealTimeActivity extends MyApplication {
 
     protected String elapsedTime(long dateTimeDiff){
         long remainingTime;
-        int activityDays = (int) dateTimeDiff /(24 * 60 * 60 * 1000);
+        trackedSport.setElapsedDays((int) dateTimeDiff /(24 * 60 * 60 * 1000));
         remainingTime = dateTimeDiff % (24 * 60 * 60 * 1000);
-        int activityHours = (int) remainingTime / (60 * 60 * 1000);
+        trackedSport.setElapsedHours((int) remainingTime / (60 * 60 * 1000));
         remainingTime = remainingTime % (60 * 60 * 1000);
-        int activityMinutes = (int) remainingTime / (60 * 1000);
+        trackedSport.setElapsedMinutes((int) remainingTime / (60 * 1000));
         remainingTime = remainingTime % ( 60 * 1000);
-        int activitySeconds = (int) remainingTime / 1000;
-        return String.valueOf(activityDays) + "j - "
-                + String.valueOf(activityHours) + "h - "
-                + String.valueOf(activityMinutes) + "m - "
-                + String.valueOf(activitySeconds) + "s";
+        trackedSport.setElapsedSeconds((int) remainingTime / 1000);
+        return trackedSport.getElapsedDays() + "j - "
+                + trackedSport.getElapsedHours() + "h - "
+                + trackedSport.getElapsedMinutes() + "m - "
+                + trackedSport.getElapsedSeconds() + "s";
     }
 }
