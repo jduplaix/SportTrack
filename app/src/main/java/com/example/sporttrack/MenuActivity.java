@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.example.sporttrack.history.HistoryActivity;
 import com.example.sporttrack.sports.SportsActivity;
 
 public class MenuActivity extends MyApplication {
@@ -34,15 +35,21 @@ public class MenuActivity extends MyApplication {
                     .show();
         });
 
-        //Fermeture complète de l'app sur clic bouton QUITTER
-        findViewById(R.id.exit).setOnClickListener(v -> {
-            finishAndRemoveTask();
+        //Appel de l'activité historique des activités sportives
+        findViewById(R.id.history).setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, HistoryActivity.class);
+            startActivity(intent);
         });
 
         //Appel de l'activité de gestion des sports
         findViewById(R.id.sports).setOnClickListener(v -> {
             Intent intent = new Intent(MenuActivity.this, SportsActivity.class);
             startActivity(intent);
+        });
+
+        //Fermeture complète de l'app sur clic bouton QUITTER
+        findViewById(R.id.exit).setOnClickListener(v -> {
+            finishAndRemoveTask();
         });
     }
 
