@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -15,7 +14,7 @@ import com.example.sporttrack.MyApplication;
 import com.example.sporttrack.R;
 import com.example.sporttrack.db.AppDb;
 import com.example.sporttrack.db.Sport;
-import com.example.sporttrack.track.TrackRealTimeActivity;
+import com.example.sporttrack.tracking.TrackRealTimeActivity;
 
 import java.util.ArrayList;
 

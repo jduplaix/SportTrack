@@ -1,6 +1,4 @@
-package com.example.sporttrack.track;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.sporttrack.tracking;
 
 import android.os.Bundle;
 

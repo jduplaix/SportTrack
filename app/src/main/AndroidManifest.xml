@@ -17,8 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".sports.SportsActivity" />
-        <activity android:name=".track.TrackRealTimeActivity" />
-        <activity android:name=".track.TrackReportActivity" />
+        <activity android:name=".tracking.TrackRealTimeActivity" />
+        <activity android:name=".tracking.TrackReportActivity" />
     </application>
 
 </manifest>
