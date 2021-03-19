@@ -41,7 +41,6 @@ public class SportsActivity extends MyApplication {
             TextView tvSportListTitle = findViewById(R.id.tvSportListTitle);
             tvSportListTitle.setText("Choisir un sport :");
         }
-        Toast.makeText(this, String.valueOf(mode),Toast.LENGTH_SHORT).show();
 
         //instanciation lv de l'activity
         ListView lvSports = (ListView) findViewById(R.id.lvSports);

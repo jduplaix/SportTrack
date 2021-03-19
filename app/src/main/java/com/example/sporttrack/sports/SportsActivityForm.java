@@ -34,7 +34,6 @@ public class SportsActivityForm extends MyApplication {
         // recup parcours utilisateur
         Intent incIntent = getIntent();
         mode = incIntent.getIntExtra("mode",0);
-        Toast.makeText(this,String.valueOf(mode),Toast.LENGTH_SHORT).show();
 
         // si le form est accédé depuis un clic sur item de la liste,
         // récup du libellé du sport > instanciation du sport correspondant à l'item
@@ -177,7 +176,7 @@ public class SportsActivityForm extends MyApplication {
 
     protected Sport duplicateCheck(){
         // vérification doublon de sport
-        // si le sport existe déjà, proposition écrasement avec les données du form actuel
+        // recherche dans la table sport si le label existe déjà, si oui, retourne le Sport correspondant
         Sport check = db.sportDao().getSport(sport.getLabel());
         return check;
     }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sporttrack.MyApplication;
 import com.example.sporttrack.R;
@@ -23,6 +24,8 @@ public class TrackRealTimeActivity extends MyApplication {
     Sport sport;
     AppDb db;
     Date startDateTime;
+    Date stopDateTime;
+    Date timeTracked;
 
 
     @Override
@@ -54,18 +57,28 @@ public class TrackRealTimeActivity extends MyApplication {
 
         // Binding des boutons Démarrer/Arrêter & Annuler
         btnStartStop.setOnClickListener(v -> {
-            if (btnStartStop.getText().equals("Démarrer")){
-                startDateTime = Calendar.getInstance().getTime();
-                tvStartDate.setText(myDateFormat.format(startDateTime));
-                tvStartTime.setText(myTimeFormat.format(startDateTime));
-                btnStartStop.setText("Arrêter");
-                chrono.start();
-            } else {
-                chrono.stop();
-                Date stopDateTime = Calendar.getInstance().getTime();
-                tvEndDate.setText(myDateFormat.format(stopDateTime));
-                tvEndTime.setText(myTimeFormat.format(stopDateTime));
-                btnStartStop.setText("Démarrer");
+            switch((String) btnStartStop.getText()){
+                case "Démarrer":
+                    chrono.start();
+                    startDateTime = Calendar.getInstance().getTime();
+                    tvStartDate.setText(myDateFormat.format(startDateTime));
+                    tvStartTime.setText(myTimeFormat.format(startDateTime));
+                    btnStartStop.setText("Arrêter");
+                    break;
+                case "Arrêter":
+                    chrono.stop();
+                    stopDateTime = Calendar.getInstance().getTime();
+                    tvEndDate.setText(myDateFormat.format(stopDateTime));
+                    tvEndTime.setText(myTimeFormat.format(stopDateTime));
+                    btnStartStop.setText("Enregistrer");
+
+                    long difference = Math.abs(stopDateTime.getTime() - startDateTime.getTime());
+                    //difference = (difference / 1000)+1;
+                    tvTotalElapsed.setText(String.valueOf(difference));
+                    break;
+                case "Enregistrer":
+                    Toast.makeText(this,"Suivi enregistré.",Toast.LENGTH_SHORT).show();
+                    finish();
             }
         });
 
